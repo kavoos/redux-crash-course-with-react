@@ -1,46 +1,46 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 5% 10%;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 5% 10%;
 }
 
 * {
-    font-weight: lighter;
-    outline: none;
-    box-sizing: border-box;
+  font-weight: lighter;
+  outline: none;
+  box-sizing: border-box;
 }
 
 button {
-    background-color: dodgerblue;
-    border: 1px solid dodgerblue;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid dodgerblue;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px;
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #fff inset;
+  -webkit-box-shadow: 0 0 0 30px #fff inset;
 }
 
 input, textarea {
-    border: 1px solid #000;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 10px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 10px;
 }
 
 input, label, textarea {
-    display: block;
-    margin: 10px 0;
-    width: 100%;
+  display: block;
+  margin: 10px 0;
+  width: 100%;
 }
 
 h1 {
-    color: dodgerblue;
-    margin-top: 50px;
+  color: dodgerblue;
+  margin-top: 50px;
 }
 
 h3 {
-    color: dodgerblue;
+  color: dodgerblue;
 }
