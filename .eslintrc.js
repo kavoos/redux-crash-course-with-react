@@ -1,7 +1,9 @@
 module.exports = {
-  // Use the AirBnB JS styleguide - https://github.com/airbnb/javascript
+  'env': {
+    "browser": true,
+    'es6': true,
+  },
   'extends': ['eslint:recommended', 'airbnb'],
-  // We use 'babel-eslint' mainly for React Native Classes
   'parser': 'babel-eslint',
   'ecmaFeatures': {
     'classes': true,
@@ -21,6 +23,5 @@ module.exports = {
       }
     ],
   },
-  // Use the AirBnB JS styleguide - https://github.com/airbnb/javascript
   'extends': ['eslint:recommended', 'airbnb'],
 };

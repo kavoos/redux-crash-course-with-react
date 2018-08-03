@@ -6,8 +6,8 @@ import { fetchItems } from '../actions/postActions';
 
 class Posts extends Component {
   componentDidMount = () => {
-    const { props } = this;
-    props.fetchPosts();
+    const { fetchPosts } = this.props;
+    fetchPosts();
   }
 
   componentDidUpdate = (prevProps) => {
@@ -46,6 +46,7 @@ class Posts extends Component {
 }
 
 Posts.propTypes = {
+  fetchPosts: PropTypes.func.isRequired,
   newPost: PropTypes.shape({
     body: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,

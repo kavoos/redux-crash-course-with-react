@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createPost } from '../actions/postActions';
+import { createItem } from '../actions/postActions';
 
 class PostForm extends Component {
   state = {
@@ -15,13 +16,13 @@ class PostForm extends Component {
 
   onSubmit = (e) => {
     const { body, title } = this.state;
-    const { props } = this;
+    const { createPost } = this.props;
     e.preventDefault();
     const post = {
       title,
       body,
     };
-    props.createPost(post);
+    createPost(post);
   };
 
   render = () => {
@@ -49,8 +50,12 @@ class PostForm extends Component {
   };
 }
 
+PostForm.propTypes = {
+  createPost: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = dispatch => ({
-  createPost: post => dispatch(createPost(post)),
+  createPost: post => dispatch(createItem(post)),
 });
 
 export default connect(null, mapDispatchToProps)(PostForm);
