@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Provider } from 'react-redux';
 
@@ -7,17 +7,13 @@ import PostForm from './components/PostForm';
 
 import store from './store';
 
-class App extends Component {
-  render = () => {
-    return (
-      <Provider store={store}>
-        <div>
-          <PostForm />
-          <Posts />
-        </div>
-      </Provider>
-    );
-  };
-}
+const App = () => (
+  <Provider store={store}>
+    <div>
+      <PostForm />
+      <Posts />
+    </div>
+  </Provider>
+);
 
 export default App;

@@ -61,7 +61,7 @@ Posts.propTypes = {
 
 Posts.defaultProps = {
   newPost: null,
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => dispatch(fetchItems()),
