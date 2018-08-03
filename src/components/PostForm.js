@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { createPost } from '../actions/postActions';
 
 class PostForm extends Component {
   state = {
@@ -12,21 +15,13 @@ class PostForm extends Component {
 
   onSubmit = (e) => {
     const { body, title } = this.state;
+    const { props } = this;
     e.preventDefault();
     const post = {
       title,
       body,
     };
-    fetch('https://jsonplaceholder.typicode.com/posts',
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(post),
-      })
-      .then(res => res.json())
-      .then(data => console.log(data));
+    props.createPost(post);
   };
 
   render = () => {
@@ -54,4 +49,8 @@ class PostForm extends Component {
   };
 }
 
-export default PostForm;
+const mapDispatchToProps = dispatch => ({
+  createPost: post => dispatch(createPost(post)),
+});
+
+export default connect(null, mapDispatchToProps)(PostForm);

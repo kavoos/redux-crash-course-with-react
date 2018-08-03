@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchPosts } from '../actions/postActions';
+import { fetchItems } from '../actions/postActions';
 
 class Posts extends Component {
   componentDidMount = () => {
-    this.props.fetchPosts();
-  };
+    const { props } = this;
+    props.fetchPosts();
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const { newPost, posts } = this.props;
+
+    if (newPost && newPost.id !== prevProps.newPost.id) {
+      posts.unshift(newPost);
+    }
+  }
 
   renderPosts = () => {
     const { posts } = this.props;
@@ -37,7 +46,11 @@ class Posts extends Component {
 }
 
 Posts.propTypes = {
-  fetchPosts: PropTypes.func.isRequired,
+  newPost: PropTypes.shape({
+    body: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+  }),
   posts: PropTypes.arrayOf(PropTypes.shape({
     body: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
@@ -45,11 +58,16 @@ Posts.propTypes = {
   })).isRequired,
 };
 
+Posts.defaultProps = {
+  newPost: null,
+}
+
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts()),
+  fetchPosts: () => dispatch(fetchItems()),
 });
 
 const mapStateToProps = state => ({
+  newPost: state.postReducer.item,
   posts: state.postReducer.items,
 });
 
