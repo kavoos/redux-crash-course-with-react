@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchItems } from '../actions/postActions';
+import Error from './Error';
+import Loading from './Loading';
+import Post from './Post';
 
 class Posts extends Component {
   componentDidMount = () => {
@@ -12,27 +15,20 @@ class Posts extends Component {
 
   componentDidUpdate = (prevProps) => {
     const { newPost, posts } = this.props;
-
     if (newPost && newPost.id !== prevProps.newPost.id) {
       posts.unshift(newPost);
     }
   }
 
   renderPosts = () => {
-    const { posts } = this.props;
-    if (posts) {
-      return posts.map(post => (
-        <div key={post.id}>
-          <h3>
-            {post.title}
-          </h3>
-          <p>
-            {post.body}
-          </p>
-        </div>
-      ));
+    const { failed, loading, posts } = this.props;
+    if (!loading.FETCH_POSTS) {
+      if (!failed.FETCH_POSTS) {
+        return posts.map(post => <Post key={post.id} title={post.title} body={post.body} />);
+      }
+      return <Error message={failed.FETCH_POSTS} />;
     }
-    return null;
+    return <Loading />;
   };
 
   render = () => (
@@ -46,11 +42,17 @@ class Posts extends Component {
 }
 
 Posts.propTypes = {
+  failed: PropTypes.shape({
+    FETCH_POSTS: PropTypes.string,
+  }).isRequired,
+  loading: PropTypes.shape({
+    FETCH_POSTS: PropTypes.bool,
+  }).isRequired,
   fetchPosts: PropTypes.func.isRequired,
   newPost: PropTypes.shape({
-    body: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    body: PropTypes.string,
+    id: PropTypes.number,
+    title: PropTypes.string,
   }),
   posts: PropTypes.arrayOf(PropTypes.shape({
     body: PropTypes.string.isRequired,
@@ -68,6 +70,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  failed: state.errorReducer,
+  loading: state.loadingReducer,
   newPost: state.postReducer.item,
   posts: state.postReducer.items,
 });
