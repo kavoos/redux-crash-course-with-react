@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createItem } from '../actions/postActions';
+import { createItem } from '../../actions/postActions';
 
 class PostForm extends Component {
   state = {

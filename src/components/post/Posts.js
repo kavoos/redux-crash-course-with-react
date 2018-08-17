@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchItems } from '../actions/postActions';
-import Error from './Error';
-import Loading from './Loading';
+import { fetchItems } from '../../actions/postActions';
+import Error from '../shared/Error';
+import Loading from '../shared/Loading';
 import Post from './Post';
 
 class Posts extends Component {
